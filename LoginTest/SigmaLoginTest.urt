@@ -1,0 +1,34 @@
+######################
+# START APPLICATION
+######################
+:runscript C:\Sigma\UiRobotData\scripts\startSigma.bat
+
+###################
+# DEFINE VARIABLES
+##################
+:$_imagePath="C:\Sigma\UiRobotData\images"
+:$username="cvezga"
+:$password="12345"
+:$login.window=.image("login.logo.PNG")
+:$login.window.timeout=30000
+:$login.username=.image("login.username.PNG")
+:$login.password=.image("login.password.PNG")
+:$login.ok.button=.image("login.ok.button.PNG")
+:$_timeout=5000
+
+##################
+# START TEST
+#################
+:print("This is a text")
+:waitFor($login.window,$login.window.timeout) 
+:searchFor($login.username)
+:click(200,5)
+:type($userName)
+:sleep(3000)
+:searchFor($login.password)
+:click(200,5)
+:sleep(3000)
+:type($password)
+:searchFor($login.ok.button)
+:click(10,10)
+:END
