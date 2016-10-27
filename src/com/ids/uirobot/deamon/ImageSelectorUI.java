@@ -3,15 +3,19 @@ package com.ids.uirobot.deamon;
 
 
 
+import java.awt.AWTException;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -76,8 +80,19 @@ public class ImageSelectorUI extends Application implements KeyListener {
 		root.getChildren().add(canvas);
 		primaryStage.setScene(new Scene(root));
 		primaryStage.show();
+		
+		BufferedImage bimage;
+		try {
+			bimage = ScreenCapture.captureScreenAll();
+			Image i = SwingFXUtils.toFXImage(bimage, null);
+			
+			gc.drawImage(i, 0, 0);  
+		} catch (AWTException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
-		  
+		
 		
 		canvas.setOnMousePressed(new EventHandler<MouseEvent>() {
 
