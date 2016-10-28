@@ -8,6 +8,7 @@ import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
@@ -20,26 +21,36 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class ImageSelectorUI extends Application implements KeyListener {
+	
+	 
+   private  Stage window;
 
-	public static void main(String[] args) {
-		Application.launch(args);
+	public void launch() {
+		Application.launch(null);
 	}
 
-	public static void show(String[] args) {
-		Application.launch(args);
+	public void show() {
+		 
+		this.window.show();
+	 
 	}
 	
-	public ImageSelectorUI(){
-		   
-	}
+	 
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
+		 window = new Stage();
+		
+		 
+		
+		Platform.setImplicitExit(false);
 		
 		
 		
@@ -67,7 +78,7 @@ public class ImageSelectorUI extends Application implements KeyListener {
 			@Override
 			public void handle(KeyEvent event) {
 				System.out.println(event.getText());
-				
+				window.hide();
 			}
 
 				
@@ -87,6 +98,19 @@ public class ImageSelectorUI extends Application implements KeyListener {
 			Image i = SwingFXUtils.toFXImage(bimage, null);
 			
 			gc.drawImage(i, 0, 0);  
+			/**
+			 Rectangle rec = new Rectangle(65, 5, 50, 40);
+			 rec.setFill(Color.rgb(91, 127, 255, 0.5));
+			 rec.setStroke(Color.hsb(40, 0.7, 0.8, 0.5));
+			 rec.setStrokeWidth(3);
+			 **/
+			 gc.setFill(Color.web("#303030", 0.75));
+			 
+			 gc.fillRect(0,0,bimage.getWidth(), bimage.getHeight());
+			 
+			 
+			 
+			 
 		} catch (AWTException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -135,10 +159,7 @@ public class ImageSelectorUI extends Application implements KeyListener {
 	                          new double[]{210, 210, 240, 240}, 4);
 	    }
 
-	public void show() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void keyTyped(java.awt.event.KeyEvent e) {

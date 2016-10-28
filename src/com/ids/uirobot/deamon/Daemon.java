@@ -9,11 +9,17 @@ public class Daemon implements Runnable, DeamonKeyListener {
 	private boolean isRunning;
 
 	private ImageSelectorUI imageSelectorUI;
+	
+	private ImageSelectorUI ui;
 
 	@Override
 	public void run() {
 		
-		 
+		ui = new ImageSelectorUI();
+		
+		ui.launch();
+		
+		
 		
 		this.isRunning = true;
 		
@@ -53,7 +59,7 @@ public class Daemon implements Runnable, DeamonKeyListener {
 	public void keyReleased(NativeKeyEvent e) {
 		String c = NativeKeyEvent.getKeyText(e.getKeyCode());
 		if("P".equals(c)){
-			ImageSelectorUI.show(null);
+			ui.show();
 			
 		}
 		
